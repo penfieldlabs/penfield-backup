@@ -35,7 +35,7 @@ DEVICE_AUTH_URL = f"{AUTH_BASE}/oauth/device_authorization"
 TOKEN_URL = f"{AUTH_BASE}/oauth/token"
 REGISTER_URL = f"{AUTH_BASE}/oauth/register"
 SCOPES = "read offline_access"
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 USER_AGENT = f"PenfieldBackup/{VERSION} (Python)"
 HTTP_TIMEOUT = 30  # seconds
 MAX_RETRIES = 3
@@ -888,10 +888,8 @@ def main() -> None:
     (output_dir / "manifest.json").write_text(json.dumps(manifest, indent=2))
 
     # Step 4: Verify
-    verify_backup(output_dir, len(memories), artifact_count, document_count)
-
-    # Clean up checkpoint on success
-    clear_checkpoint(output_dir)
+    if verify_backup(output_dir, len(memories), artifact_count, document_count):
+        clear_checkpoint(output_dir)
 
     # Summary
     print(f"\n  {GREEN}{BOLD}✓ Backup complete!{RESET}\n")

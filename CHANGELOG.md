@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.1 — 2026-05-20
+
+### Fixed
+
+- Checkpoint no longer cleared when post-backup verification fails. Previously
+  a failed verification would delete the checkpoint, forcing a full re-download
+  on `--resume`.
+
+### Added
+
+- Test suite (61 tests covering all core logic).
+- RELEASE_NOTES.md for consistency with other Penfield tools.
+
 ## 1.0.0 — 2026-04-03
 
 Initial public release.
