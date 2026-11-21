@@ -48,14 +48,14 @@ If a backup is interrupted (network drop, Ctrl-C, laptop closed), run again with
 
 ## How authorization works
 
-Penfield Backup uses the OAuth 2.0 Device Code flow with **read-only** scope. It cannot modify or delete your data.
+Penfield Backup uses the OAuth 2.0 Device Code flow and asks for **read-only** access. It only ever reads your data.
 
 1. The tool registers itself as an OAuth client with Penfield
 2. You authorize in your browser at `portal.penfield.app/device`
 3. Tokens are cached locally at `~/.config/penfield-backup/auth.json` (permissions `0600`)
 4. On subsequent runs, the cached token is reused or refreshed automatically
 
-To revoke access: `python3 penfield_backup.py --logout`
+To remove the saved credentials from this computer: `python3 penfield_backup.py --logout`. This deletes the local file only. It does not end the authorization at Penfield, which expires on its own within 30 days if it is not used.
 
 ## Environment variables
 
